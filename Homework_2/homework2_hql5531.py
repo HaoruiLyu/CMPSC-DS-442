@@ -2,28 +2,40 @@
 # CMPSC 442: Homework 2
 ############################################################
 
-student_name = "Type your full name here."
+student_name = "Haorui Lyu"
 
 ############################################################
 # Imports
 ############################################################
 
 # Include your imports here, if any are used.
-
-
+from math import factorial
 
 ############################################################
 # Section 1: N-Queens
 ############################################################
 
 def num_placements_all(n):
-    pass
+    # Use C(n*n, n) to solve this question
+    # The formula is (n * n)! / ((n * n - n)! * n!)
+    return int(factorial(n * n) / (factorial(n * n - n) * factorial(n)))
 
 def num_placements_one_per_row(n):
-    pass
+    return n ** n
 
 def n_queens_valid(board):
-    pass
+    column_list = []
+    for i in range(len(board)):
+        if board[i] not in column_list: # Check if some queens in same column
+            for j in range(len(column_list)):
+                # Check if queen in same diagonal
+                # if row_1 - row_2 = col_1 - col_2, their are in same diagonal
+                if board[i] == column_list[j] - (i - j) or board[i] == column_list[j] - (j - i):
+                        return False
+            column_list.append(board[i])
+        else:
+            return False
+    return True
 
 def n_queens_solutions(n):
     pass
