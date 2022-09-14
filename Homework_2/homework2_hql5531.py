@@ -11,6 +11,9 @@ student_name = "Haorui Lyu"
 # Include your imports here, if any are used.
 
 from math import factorial
+from queue import Queue
+import random
+import copy
 '''
 from itertools import permutations
 '''
@@ -48,6 +51,8 @@ def n_queens_solutions(n):
     for board in possible:
         if n_queens_valid(board):
             yield board
+            
+# Another solution, but the time complexity is relatively high            
 
 '''
             
@@ -72,30 +77,59 @@ class LightsOutPuzzle(object):
 
     def __init__(self, board):
         self.board = board
+        self.row = len(board)
+        self.col = len(board[0])
 
     def get_board(self):
         return self.board
 
     def perform_move(self, row, col):
-        pass
+        dira = [[0,0],[-1,0],[1,0],[0,1],[0,-1]]
+        for i in dira:
+            x_move = row + dira[0]
+            y_move = col + dira[1]
+            if 0 <= x_move < self.row and 0 <= y_move < self.col:
+                self.board[x_move][y_move] ^= True
 
     def scramble(self):
-        pass
+        for i in self.row:
+            for j in self.col:
+                if random.random() < 0.5:
+                    self.perform_move(i, j)
 
     def is_solved(self):
-        pass
+        for i in range(self.row):
+            for j in range(self.col):
+                if self.board[i][j]:
+                    return False
+        return True
+                    
 
     def copy(self):
-        pass
+        return copy.deepcopy(self)
 
     def successors(self):
-        pass
+        for i in range(self.row):
+            for j in range(self.col):
+                cop = self.copy()
+                cop.perform_move(i, j)
+                yield ((i,j),cop)
 
     def find_solution(self):
-        pass
+        vit = set()
+        q = Queue() # import FIFP queue
+        q.put([self,[]])
+        while not q.empty():
+            info = q.get()
+            cur, moves = info[0], info[1]
+            if cur is_solved():
+                return moves
+            strs = ""
+            for i in range(cu)
+        
 
 def create_puzzle(rows, cols):
-    pass
+    return LightsOutPuzzle([[False] * cols for i in range(rows)])
 
 ############################################################
 # Section 3: Linear Disk Movement
