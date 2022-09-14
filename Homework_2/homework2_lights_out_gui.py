@@ -2,7 +2,7 @@ import sys
 import tkinter
 
 # Replace STUDENTID with your student id
-import STUDENTID as homework2
+import homework2_hql5531 as homework2
 
 class Light(tkinter.Canvas):
 

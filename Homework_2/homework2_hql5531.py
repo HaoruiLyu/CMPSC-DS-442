@@ -9,7 +9,11 @@ student_name = "Haorui Lyu"
 ############################################################
 
 # Include your imports here, if any are used.
+
 from math import factorial
+'''
+from itertools import permutations
+'''
 
 ############################################################
 # Section 1: N-Queens
@@ -35,11 +39,31 @@ def n_queens_valid(board):
             column_list.append(board[i])
         else:
             return False
-    return True
+    return True        
+    
+'''
 
 def n_queens_solutions(n):
-    pass
+    possible = map(list, list(permutations(range(n))))
+    for board in possible:
+        if n_queens_valid(board):
+            yield board
 
+'''
+            
+def n_queens_solutions(n):
+    res = []
+    def n_queens_helper(i = 0, col = [], l_diag = set(), r_diag = set()):
+        if i == n:
+            res.append(col)
+            return
+        for j in range(n):
+            if j not in col and i - j not in l_diag and i + j not in r_diag:
+                n_queens_helper(i+1, col+[j], l_diag|{i-j}, r_diag|{i+j} )
+    n_queens_helper()
+    for i in res:
+        yield i
+            
 ############################################################
 # Section 2: Lights Out
 ############################################################
@@ -47,10 +71,10 @@ def n_queens_solutions(n):
 class LightsOutPuzzle(object):
 
     def __init__(self, board):
-        pass
+        self.board = board
 
     def get_board(self):
-        pass
+        return self.board
 
     def perform_move(self, row, col):
         pass
