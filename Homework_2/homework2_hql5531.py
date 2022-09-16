@@ -341,7 +341,7 @@ def solve_distinct_disks(length, n):
                 nx[i], nx[i - 1] = nx[i - 1], nx[i]
                 q.put([nx, moves + [(i, i - 1)]])
             if i - 2 >= 0 and pos[i - 1] != 0 and pos[i - 2] == 0:
-                # The current disk can be moved to the second position from the left
+                # The current disk can be moved to the second position on the left
                 nx = copy.deepcopy(pos)
                 nx[i], nx[i - 2] = nx[i - 2], nx[i]
                 q.put([nx, moves + [(i, i - 2)]])
